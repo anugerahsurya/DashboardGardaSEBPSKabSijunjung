@@ -468,3 +468,43 @@ main {
 .full-orange-section .info-card:hover p {
   color: #f79039;
 }
+
+/* ===============================
+   TABEL DETAIL FIX WIDTH TOTAL
+================================= */
+
+#detail-table-container table {
+  width: 100%;
+  table-layout: fixed; /* WAJIB */
+}
+
+#detail-table-container colgroup col:first-child {
+  width: 40%;
+}
+
+#detail-table-container colgroup col:last-child {
+  width: 60%;
+}
+
+#detail-table-container th,
+#detail-table-container td {
+  white-space: normal; /* biar turun ke bawah */
+  word-break: break-word; /* paksa wrap */
+  overflow-wrap: break-word;
+  vertical-align: top;
+}
+
+/* CSS untuk Bagian KPI agar Sesuai Palette Sensus Ekonomi 2026 */
+.border-kpi {
+  border: 2px solid #f79039 !important;
+  transition: 0.3s ease;
+}
+
+.border-kpi:hover {
+  box-shadow: 0 8px 20px rgba(247, 144, 57, 0.25);
+  transform: translateY(-3px);
+}
+
+#kecamatan-filter {
+  text-transform: uppercase;
+}
