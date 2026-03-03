@@ -20,7 +20,7 @@ https://templatemo.com/tm-587-tiya-golf-club
   --p-color: #717275;
   --link-hover-color: #f2cc8f;
 
-  --body-font-family: "DM Sans", sans-serif;
+  --body-font-family: "Poppins", sans-serif;
 
   --h1-font-size: 42px;
   --h2-font-size: 36px;
@@ -440,8 +440,7 @@ strong {
 .navbar {
   background: transparent;
   z-index: 99;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 3px 0px;
 }
 
 .navbar-brand,
@@ -759,6 +758,7 @@ strong {
 -----------------------------------------*/
 .about-section {
   padding-bottom: 70px;
+  padding-top: 150px;
 }
 
 .member-block-image-wrap {
