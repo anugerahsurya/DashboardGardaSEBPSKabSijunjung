@@ -1,0 +1,470 @@
+/* ================================================= */
+/* 🎨 COLOR VARIABLES */
+/* ================================================= */
+:root {
+  /* Brand Colors */
+  --color-primary: #f79039;
+  --color-primary-dark: #ce7730;
+  --color-primary-darker: #a25f28;
+
+  /* Accent */
+  --color-accent: #f79039;
+
+  /* Bootstrap-like Danger */
+  --color-danger: #dc3545;
+  --color-danger-dark: #bb2d3b;
+  --color-danger-border: #b02a37;
+
+  /* Neutral Colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-light: #f8f9fa;
+  --color-gray-lighter: #f3f3f3;
+  --color-gray-medium: #e9ecef;
+  --color-gray-border: #cccccc;
+  --color-gray-text: #333333;
+
+  /* Overlay */
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+  --overlay-light: rgba(255, 255, 255, 0.7);
+  --overlay-white-soft: rgba(255, 255, 255, 0.95);
+
+  /* Shadows */
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-heavy: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* ================================================= */
+/* 🌐 GLOBAL */
+/* ================================================= */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--color-gray-light);
+}
+
+/* ================================================= */
+/* 🏠 LANDING PAGE */
+/* ================================================= */
+.landing-page {
+  height: 100vh;
+  background-image: url("https://images.pexels.com/photos/974314/pexels-photo-974314.jpeg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: flex-start; /* ⬅️ rata kiri */
+  align-items: center;
+  text-align: left; /* ⬅️ teks rata kiri */
+  position: relative;
+  color: var(--color-white);
+  padding: 0 8%; /* ⬅️ kasih jarak dari kiri */
+  box-shadow: var(--shadow-heavy);
+  z-index: 1;
+}
+
+.landing-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--overlay-dark);
+}
+
+.landing-content {
+  z-index: 10;
+  max-width: 650px; /* ⬅️ jangan terlalu lebar */
+}
+
+.landing-content h1 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  line-height: 1.2;
+  font-weight: 700 !important;
+  margin-bottom: 0.6em !important;
+}
+
+/* Subteks baru */
+.landing-subtitle {
+  font-size: 1.05rem;
+  font-weight: 400;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Button Custom */
+.btn-custom {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-white);
+  padding: 12px 35px;
+  font-size: 1.25rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: var(--color-white);
+}
+
+/* ================================================= */
+/* 🧭 NAVBAR */
+/* ================================================= */
+.navbar-nav .nav-item {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.navbar-nav .nav-link {
+  padding-bottom: 0.5rem;
+  transition:
+    color 0.3s ease,
+    border-bottom 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--color-primary) !important;
+  border-bottom: 3px solid var(--color-primary);
+}
+
+/* ================================================= */
+/* 🧭 SIDEBAR & FILTER */
+/* ================================================= */
+aside {
+  padding-bottom: 2rem !important;
+}
+
+.filter-section {
+  border: none !important;
+  border-radius: 1rem !important;
+}
+
+#apply-filter-btn {
+  background-color: var(--color-danger);
+  border: 2px solid var(--color-danger-border);
+  color: var(--color-white);
+  width: 100%;
+  border-radius: 6px;
+  font-weight: bold;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+#apply-filter-btn:hover {
+  background-color: var(--color-danger-dark);
+  transform: scale(1.02);
+}
+
+.btn-w-100 {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-white) !important;
+}
+
+.btn-w-100:hover {
+  background-color: var(--color-primary-darker) !important;
+  border-color: var(--color-primary-darker) !important;
+}
+
+/* ================================================= */
+/* 📝 INFO SECTION */
+/* ================================================= */
+.info-section {
+  position: relative;
+  overflow: hidden;
+}
+.info-section::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(247, 144, 57, 0.08);
+  border-radius: 50%;
+  top: -80px;
+  right: -80px;
+}
+
+.section-badge {
+  display: inline-block;
+  background: rgba(247, 144, 57, 0.1);
+  color: #f79039;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.section-title {
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: #222;
+}
+
+.section-subtitle {
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.info-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.info-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(247, 144, 57, 0.15);
+}
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #f79039, #ffb266);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 24px;
+}
+
+.icon-primary-color {
+  color: var(--color-primary);
+}
+
+.icon-large {
+  font-size: 3.5rem;
+  display: block;
+}
+
+.info-card {
+  border: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+}
+
+.info-card .card-title {
+  color: var(--color-gray-text);
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ================================================= */
+/* 🦶 FOOTER */
+/* ================================================= */
+footer {
+  border-top: 3px solid var(--color-primary);
+}
+
+/* ================================================= */
+/* ✅ CHECKBOX AREA */
+/* ================================================= */
+.checkbox-scroll {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--color-gray-border);
+  padding: 8px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.checkbox-scroll .form-check {
+  margin-bottom: 0.2rem;
+  padding-right: 10px;
+  padding-left: 1.5em;
+  text-align: left;
+}
+
+.checkbox-scroll .form-check-input {
+  float: left;
+  margin-left: -1.5em;
+  vertical-align: top;
+  margin-top: 0.25em;
+}
+
+.checkbox-scroll .form-check-label {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: normal;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+/* ================================================= */
+/* 📈 DASHBOARD */
+/* ================================================= */
+main {
+  padding-top: 1rem;
+}
+
+.card {
+  border-radius: 0.75rem;
+}
+
+.card-body h6.card-subtitle {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.card-body p.card-text {
+  margin-top: 0.2rem;
+}
+
+#map {
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-medium);
+}
+
+.card-header {
+  background-color: var(--color-gray-medium);
+  font-weight: 600;
+  font-size: 1.05rem;
+  border-top-left-radius: calc(0.75rem - 1px);
+  border-top-right-radius: calc(0.75rem - 1px);
+}
+
+.table-responsive {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.table thead.table-secondary th {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+  border-color: var(--color-primary-dark);
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: var(--color-gray-lighter);
+}
+
+/* ================================================= */
+/* 🗺️ LEAFLET */
+/* ================================================= */
+.info {
+  padding: 6px 8px;
+  font:
+    14px/16px "Poppins",
+    sans-serif;
+  background: var(--overlay-white-soft);
+  box-shadow: var(--shadow-medium);
+  border-radius: 5px;
+}
+
+.info h4 {
+  margin: 0 0 5px;
+  color: var(--color-gray-text);
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  opacity: 0.8;
+  border-radius: 3px;
+  border: 1px solid var(--color-gray-border);
+}
+
+.legend .legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.kab-label-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
+}
+
+.kab-label-tooltip .leaflet-tooltip-content {
+  font-family: "Poppins", sans-serif;
+  font-size: 3em;
+  font-weight: 900;
+  color: var(--color-black);
+  text-shadow: 2px 2px 5px var(--overlay-light);
+}
+
+/* ================================
+   FULL ORANGE SECTION - SE2026
+================================= */
+
+/* =====================================================
+   FULL ORANGE SECTION (SECTION BAWAH)
+===================================================== */
+
+.info-section .full-orange-section {
+  background: #f79039 !important;
+}
+
+.full-orange-section {
+  background-color: #f79039;
+  padding: 2em 0;
+  color: #ffffff;
+  position: relative;
+}
+
+/* Batas visual antar section */
+.full-orange-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Header putih */
+.full-orange-section .section-title,
+.full-orange-section .section-subtitle {
+  color: #ffffff;
+}
+
+/* Badge putih outline */
+.full-orange-section .section-badge {
+  background: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+/* Card di section orange */
+.full-orange-section .info-card {
+  background: rgb(255, 255, 255);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+/* Icon & text putih */
+.full-orange-section h5,
+.full-orange-section p {
+  color: #f79039;
+}
+
+/* Hover effect premium */
+.full-orange-section .info-card:hover {
+  background: #ffffff;
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.full-orange-section .info-card:hover h5,
+.full-orange-section .info-card:hover p {
+  color: #f79039;
+}
