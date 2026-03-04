@@ -446,8 +446,8 @@ strong {
 .navbar {
   background: var(--primary-color); 
   z-index: 99;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .navbar-brand,
@@ -1218,7 +1218,7 @@ strong {
 
   .navbar-expand-lg .navbar-nav {
     padding-top: 15px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
   }
 
   .navbar-expand-lg .navbar-nav .nav-link {
