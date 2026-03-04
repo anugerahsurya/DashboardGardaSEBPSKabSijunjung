@@ -9,29 +9,29 @@ let map = null;
 // REFERENSI NAMA KBLI (SAMPLE UTAMA)
 // Tambahkan sesuai kebutuhan
 // ===============================
-const kbliReference = {
-  "01135": "Perkebunan Tanaman Buah",
-  "01262": "Perkebunan Kelapa Sawit",
-  16101: "Industri Penggergajian Kayu",
-  16221: "Industri Kayu Lapis",
-  16292: "Industri Barang Anyaman",
-  41000: "Konstruksi Gedung",
-  42201: "Konstruksi Jalan",
-  46100: "Perdagangan Besar",
-  46202: "Perdagangan Hasil Pertanian",
-  38302: "Daur Ulang Limbah",
-};
+let kbliReference = {};
+
+async function loadKBLIReference() {
+  try {
+    const res = await fetch("shapefile/kbli2025.json");
+    kbliReference = await res.json();
+    console.log("KBLI loaded:", Object.keys(kbliReference).length);
+  } catch (err) {
+    console.error("Gagal memuat KBLI:", err);
+  }
+}
 
 // ===============================
 // INIT MAP
 // ===============================
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   map = L.map("map").setView([-2.5, 118], 6);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap",
   }).addTo(map);
 
+  await loadKBLIReference(); // ← TAMBAHKAN INI
   loadData();
 
   document
