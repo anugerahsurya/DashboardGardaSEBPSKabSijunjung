@@ -1266,6 +1266,49 @@ strong {
   }
 }
 
+/* SECTION */
+/* CONTAINER SCROLL */
+/* CONTAINER SCROLL */
+.team-scroll{
+  display:flex;
+  gap:30px;
+  overflow-x:auto;
+  padding:20px 10px;
+  scroll-behavior:smooth;
+}
+
+/* HIDE SCROLLBAR */
+.team-scroll::-webkit-scrollbar{
+  display:none;
+}
+
+/* CARD TEAM */
+.team-member{
+  min-width:300px;
+  height:350px;   
+  flex:0 0 auto;
+  text-align:center;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  transition:0.3s;
+  font-size: 5px;
+}
+
+.team-member:hover{
+  transform:translateY(-8px);
+}
+
+/* FOTO */
+.team-member img{
+  width:160px;
+  height:160px;
+  object-fit:cover;
+  border-radius:50%;
+  margin-bottom:15px;
+}
+
 @media screen and (max-width: 480px) {
   .navbar-brand {
     font-size: var(--p-font-size);
