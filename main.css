@@ -509,6 +509,22 @@ main {
   text-transform: uppercase;
 }
 
+#satelliteMap {
+  height: 250px;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+#selected-nagari-name {
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  background: #f79039;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
 /* member */
 .team-member {
   margin-bottom: 3rem;
