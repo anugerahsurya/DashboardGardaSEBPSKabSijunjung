@@ -444,7 +444,7 @@ strong {
 }
 
 .navbar {
-  background: var(--primary-color); 
+  background: var(--primary-color);
   z-index: 99;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -1203,7 +1203,7 @@ strong {
   }
 
   .navbar {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
   }
 
   .navbar-nav .dropdown-menu {
