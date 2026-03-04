@@ -1227,9 +1227,9 @@ strong {
   }
 
   .hero-section {
-    position: relative;
-    top: 82px;
-    margin-bottom: 82px;
+    min-height: calc(100vh - 4rem);
+    margin-top: 4rem;
+    margin-bottom: 5rem;
   }
 
   .events-listing-section {
@@ -1266,85 +1266,124 @@ strong {
   }
 }
 
-/* SECTION */
-/* CONTAINER SCROLL */
-/* CONTAINER SCROLL */
+/* ================================================= */
+/* SECTION TEAM */
+/* ================================================= */
 
 #team .container {
   margin-top: clamp(2rem, 5vw, 5rem);
 }
 
+/* ================================================= */
+/* SCROLL CONTAINER */
+/* ================================================= */
+
 .team-scroll {
   display: flex;
-  gap: 2rem; /* pakai rem */
+  gap: 2.5rem; /* jarak lebih lega */
   overflow-x: auto;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem;
   scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
 }
 
 .team-scroll::-webkit-scrollbar {
   display: none;
 }
 
-/* CARD TEAM */
+/* ================================================= */
+/* CARD TEAM (DIPERBESAR) */
+/* ================================================= */
+
 .team-member {
   flex: 0 0 auto;
-  min-width: 14rem; /* fleksibel */
-  max-width: 16rem;
+
+  /* Lebar diperbesar */
+  width: clamp(18rem, 20vw, 20rem);
+
+  /* Tinggi diperbesar */
+  min-height: 20rem;
+
   background: #fff;
   padding: 1.5rem;
-  border-radius: 1.25rem;
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
+  border-radius: 1.5rem;
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+
   transition: all 0.3s ease;
+  scroll-snap-align: start;
 }
 
 .team-member:hover {
-  transform: translateY(-0.5rem);
+  transform: translateY(-0.6rem);
 }
 
-/* FOTO */
+/* ================================================= */
+/* FOTO DIPERBESAR */
+/* ================================================= */
+
 .team-member img {
-  width: 8rem; /* jauh lebih stabil */
-  height: 8rem;
+  width: clamp(8rem, 9vw, 9.5rem);
+  height: clamp(8rem, 9vw, 9.5rem);
   object-fit: cover;
   border-radius: 50%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
-/* NAMA */
+/* ================================================= */
+/* TYPOGRAPHY DIPERBESAR */
+/* ================================================= */
+
 .team-member h5 {
-  font-size: 1rem; /* default nyaman */
+  font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.4;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.75rem;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
 }
 
-/* JABATAN */
 .team-member p {
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
 }
 
-/* Responsive */
+/* ================================================= */
+/* RESPONSIVE MOBILE */
+/* ================================================= */
+
 @media (max-width: 768px) {
   .team-member {
-    min-width: 12rem;
-    padding: 1.25rem;
+    width: 16rem;
+    min-height: 23rem;
+    padding: 1.5rem;
   }
 
   .team-member img {
-    width: 7rem;
-    height: 7rem;
+    width: 7.5rem;
+    height: 7.5rem;
   }
 
   .team-member h5 {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .team-member p {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
