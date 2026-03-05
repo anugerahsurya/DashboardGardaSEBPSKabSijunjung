@@ -1051,30 +1051,81 @@ strong {
   SITE FOOTER            
 -----------------------------------------*/
 .site-footer {
-  position: relative;
-  padding-bottom: 200px;
+  background: #f79039;
+  color: #fff;
+  padding: 1rem 0 1rem;
+  margin-top: 2rem;
 }
 
-.site-footer .container {
-  position: relative;
-  z-index: 2;
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.site-footer svg {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  pointer-events: none;
+/* BRAND */
+.footer-brand img {
+  width: 55px;
+  margin-bottom: 1rem;
 }
 
-.site-footer-title {
-  color: var(--secondary-color);
+.footer-brand h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+  color: #fff;
 }
 
-.site-footer p span {
-  font-weight: var(--font-weight-medium);
-  margin-right: auto;
+.footer-brand p {
+  opacity: 0.8;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+/* KONTAK */
+.footer-contact h5,
+.footer-links h5 {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.footer-contact p {
+  margin: 0.4rem 0;
+  opacity: 0.8;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+/* LINKS */
+.footer-links a {
+  display: block;
+  text-decoration: none;
+  color: #ddd;
+  margin-bottom: 0.4rem;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: #f28c38;
+}
+
+/* BOTTOM */
+.footer-brand img {
+  width: 45px;
+  filter: brightness(0) invert(1);
+}
+
+.footer-bottom {
+  border-top: 1px solid #f79039;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.footer-bottom p {
+  color: #ddd;
 }
 
 /*---------------------------------------
@@ -1360,6 +1411,204 @@ strong {
   -webkit-line-clamp: 3;
   line-clamp: 3;
   overflow: hidden;
+}
+
+/* =======================
+Section insert section
+======================== */
+/* SECTION */
+.insight-section {
+  padding: 5.625rem 0; /* 90px */
+  background: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* HEADER */
+.insight-header {
+  text-align: center;
+  margin-bottom: 3.75rem; /* 60px */
+}
+
+/* garis kecil elegan di bawah judul */
+.insight-header h2::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: #000000;
+  display: block;
+  margin: 0.8rem auto 0;
+  border-radius: 2px;
+}
+
+.insight-header h2 {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #222;
+}
+
+.insight-header p {
+  color: #777;
+  font-size: 1.2rem; /* 16px */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* GRID */
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13.75rem, 1fr)); /* 220px */
+  gap: 1.875rem; /* 30px */
+}
+
+/* BUTTON CARD */
+.insight-button {
+  background: linear-gradient(135deg, #f28c38, #ff9f43);
+  color: white;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 11rem;
+  border-radius: 0.9375rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.08);
+}
+
+/* HOVER → WARNA LEBIH PEKAT */
+.insight-button:hover {
+  background: linear-gradient(135deg, #df6908, #e88a1a);
+  box-shadow: 0 1.25rem 2.1875rem rgba(0, 0, 0, 0.18);
+  transform: translateY(-0.4rem);
+}
+
+/* ACTIVE → SAAT DIKLIK */
+.insight-button:active {
+  background: linear-gradient(135deg, #c15400, #d97706);
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.25);
+}
+
+/* ICON */
+.insight-button i {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  transition: 0.25s;
+}
+
+/* ICON ANIMASI */
+.insight-button:hover i {
+  transform: scale(1.15);
+}
+
+/* TEXT */
+.insight-button p {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  color: #fff;
+}
+
+/* =======================
+Section Informasi
+======================== */
+/* SECTION */
+.informasi-section {
+  padding: 5.625rem 0;
+  background: #f28c38; /* sebelumnya putih */
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* HEADER */
+.informasi-header {
+  text-align: center;
+  margin-bottom: 3.75rem;
+}
+
+/* garis kecil */
+.informasi-header h2::after {
+  content: "";
+  width: 3.75rem;
+  height: 0.1875rem;
+  background: #ffffff;
+  display: block;
+  margin: 0.8rem auto 0;
+  border-radius: 0.125rem;
+}
+
+.informasi-header h2 {
+  font-size: 2.25rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+.informasi-header p {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* GRID */
+.informasi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13.75rem, 1fr));
+  gap: 1.875rem;
+}
+
+/* CARD BUTTON */
+.informasi-button {
+  background: #ffffff; /* sebelumnya orange */
+  color: #f28c38;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 11rem;
+  border-radius: 0.9375rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.08);
+}
+
+/* HOVER */
+.informasi-button:hover {
+  background: #fff5eb;
+  transform: translateY(-0.4rem);
+  box-shadow: 0 1.25rem 2.1875rem rgba(0, 0, 0, 0.18);
+}
+
+/* ACTIVE */
+.informasi-button:active {
+  background: #ffe4cc;
+  transform: translateY(0) scale(0.98);
+}
+
+/* ICON */
+.informasi-button i {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: #f28c38;
+  transition: 0.25s;
+}
+
+/* ICON HOVER */
+.informasi-button:hover i {
+  transform: scale(1.15);
+}
+
+/* TEXT */
+.informasi-button p {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  color: #f28c38;
+  text-align: center; /* rata tengah */
+  max-width: 12rem;
 }
 
 /* ================================================= */
