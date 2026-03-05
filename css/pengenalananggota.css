@@ -1,0 +1,97 @@
+#pengenalan {
+  padding-top: clamp(4rem, 8vw, 7rem);
+}
+
+/* ================================================= */
+/* GRID TEAM */
+/* ================================================= */
+
+.team-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 2rem;
+
+  justify-items: center;
+}
+
+/* ================================================= */
+/* RESPONSIVE */
+/* ================================================= */
+
+@media (max-width: 992px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================================= */
+/* CARD TEAM (DIPERBESAR) */
+/* ================================================= */
+
+.team-member {
+  width: 100%;
+  max-width: 20rem;
+
+  min-height: 20rem;
+
+  background: #fff;
+
+  padding: 1.5rem;
+
+  border-radius: 1.5rem;
+
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  transition: all 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-0.6rem);
+}
+
+/* ================================================= */
+/* FOTO */
+/* ================================================= */
+
+.team-member img {
+  width: clamp(8rem, 9vw, 9.5rem);
+  height: clamp(8rem, 9vw, 9.5rem);
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  margin-bottom: 1.25rem;
+}
+
+/* ================================================= */
+/* TYPOGRAPHY */
+/* ================================================= */
+
+.team-member h5 {
+  font-size: 1.15rem;
+  font-weight: 600;
+
+  line-height: 1.4;
+
+  margin-bottom: 0.75rem;
+}
+
+.team-member p {
+  font-size: 0.95rem;
+
+  line-height: 1.6;
+}
