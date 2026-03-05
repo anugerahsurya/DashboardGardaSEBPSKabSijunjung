@@ -1,23 +1,29 @@
 // ===============================
-// GLOBAL VARIABLE
+// GLOBAL VARIABLES
 // ===============================
 let geojsonData = null;
 let filteredLayer = null;
 let selectedFeature = null;
 let map = null;
+let satelliteMap = null;
+let satelliteMarker = null;
 
-// REFERENSI NAMA KBLI (SAMPLE UTAMA)
-// Tambahkan sesuai kebutuhan
-// ===============================
+let currentKBLIData = [];
 let kbliReference = {};
 
+let kbliCacheAll = {};
+let kbliCacheByKecamatan = {};
+
+// ===============================
+// LOAD KBLI REFERENCE
+// ===============================
 async function loadKBLIReference() {
   try {
-    const res = await fetch("shapefile/kbli2025.json");
+    const res = await fetch("shapefile/kbli2025_filtered.json");
     kbliReference = await res.json();
-    console.log("KBLI loaded:", Object.keys(kbliReference).length);
+    console.log("KBLI reference loaded");
   } catch (err) {
-    console.error("Gagal memuat KBLI:", err);
+    console.error("Gagal load KBLI reference", err);
   }
 }
 
@@ -31,8 +37,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     attribution: "© OpenStreetMap",
   }).addTo(map);
 
-  await loadKBLIReference(); // ← TAMBAHKAN INI
-  loadData();
+  satelliteMap = L.map("satelliteMap", {
+    zoomControl: false,
+    attributionControl: false,
+  }).setView([-0.7, 100.9], 11);
+
+  L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    { maxZoom: 19 },
+  ).addTo(satelliteMap);
+
+  await loadKBLIReference();
+  await loadData();
 
   document
     .getElementById("kecamatan-filter")
@@ -41,6 +57,26 @@ document.addEventListener("DOMContentLoaded", async () => {
   document
     .getElementById("reset-filter-btn")
     .addEventListener("click", resetFilter);
+
+  // ===============================
+  // LIVE SEARCH KBLI (DEBOUNCE)
+  // ===============================
+  let searchTimeout;
+  document.getElementById("kbli-search").addEventListener("input", function () {
+    clearTimeout(searchTimeout);
+
+    searchTimeout = setTimeout(() => {
+      const keyword = this.value.toLowerCase();
+
+      const filtered = currentKBLIData.filter(
+        (item) =>
+          item.kode.includes(keyword) ||
+          item.nama.toLowerCase().includes(keyword),
+      );
+
+      renderKBLITable(filtered);
+    }, 300);
+  });
 });
 
 // ===============================
@@ -52,6 +88,7 @@ async function loadData() {
     geojsonData = await res.json();
 
     populateKecamatanFilter();
+    precomputeKBLI(); // 🔥 cache KBLI sekali saja
     applyFilter();
   } catch (err) {
     console.error(err);
@@ -60,7 +97,36 @@ async function loadData() {
 }
 
 // ===============================
-// POPULATE KECAMATAN
+// PRECOMPUTE KBLI CACHE (🔥 OPTIMASI TERBESAR)
+// ===============================
+function precomputeKBLI() {
+  const globalAgg = {};
+  const kecAgg = {};
+
+  geojsonData.features.forEach((f) => {
+    const kec = f.properties.wadmkc;
+
+    if (!kecAgg[kec]) kecAgg[kec] = {};
+
+    Object.keys(f.properties).forEach((key) => {
+      if (/^\d{5}$/.test(key)) {
+        const val = Number(f.properties[key]);
+        if (!isNaN(val) && val > 0) {
+          globalAgg[key] = (globalAgg[key] || 0) + val;
+          kecAgg[kec][key] = (kecAgg[kec][key] || 0) + val;
+        }
+      }
+    });
+  });
+
+  kbliCacheAll = globalAgg;
+  kbliCacheByKecamatan = kecAgg;
+
+  console.log("KBLI cache ready");
+}
+
+// ===============================
+// POPULATE KECAMATAN FILTER
 // ===============================
 function populateKecamatanFilter() {
   const select = document.getElementById("kecamatan-filter");
@@ -82,29 +148,27 @@ function populateKecamatanFilter() {
 // APPLY FILTER
 // ===============================
 function applyFilter() {
-  const selectedKec = document.getElementById("kecamatan-filter").value;
+  requestAnimationFrame(() => {
+    const selectedKec = document.getElementById("kecamatan-filter").value;
 
-  let filteredFeatures = geojsonData.features;
+    let filteredFeatures = geojsonData.features;
 
-  if (selectedKec) {
-    filteredFeatures = filteredFeatures.filter(
-      (f) => f.properties.wadmkc === selectedKec,
-    );
-  }
+    if (selectedKec) {
+      filteredFeatures = filteredFeatures.filter(
+        (f) => f.properties.wadmkc === selectedKec,
+      );
+    }
 
-  const filteredGeoJson = {
-    type: "FeatureCollection",
-    features: filteredFeatures,
-  };
+    const filteredGeoJson = {
+      type: "FeatureCollection",
+      features: filteredFeatures,
+    };
 
-  updateMap(filteredGeoJson);
-  console.log("Filtered:", filteredFeatures.length);
-  console.log(
-    "Contoh jumlah_usaha:",
-    filteredFeatures[0]?.properties?.jumlah_usaha,
-  );
-  updateKPI(filteredFeatures);
-  updateDetailTable(null);
+    updateMap(filteredGeoJson);
+    updateKPI(filteredFeatures);
+    updateKBLIByKecamatan(selectedKec);
+    updateDetailTable(null);
+  });
 }
 
 // ===============================
@@ -113,44 +177,24 @@ function applyFilter() {
 function resetFilter() {
   document.getElementById("kecamatan-filter").value = "";
   applyFilter();
+
+  document.getElementById("selected-nagari-name").innerText =
+    "Belum ada nagari dipilih";
+
+  const instruction = document.getElementById("satellite-instruction");
+  if (instruction) instruction.style.display = "block";
 }
 
-document
-  .getElementById("reset-filter-btn")
-  .addEventListener("click", function () {
-    if (filteredLayer) {
-      map.fitBounds(filteredLayer.getBounds());
-    }
-
-    // Reset nama nagari
-    document.getElementById("selected-nagari-name").innerText =
-      "Belum ada nagari dipilih";
-
-    // Tampilkan kembali instruksi
-    const instruction = document.getElementById("satellite-instruction");
-    if (instruction) {
-      instruction.style.display = "block";
-    }
-  });
-
 // ===============================
-// UPDATE KPI (FINAL)
+// UPDATE KPI
 // ===============================
 function updateKPI(features) {
   document.getElementById("kpi-desa").innerText = features.length;
 
   let totalUsaha = 0;
-
   features.forEach((f) => {
-    const raw = f.properties["jumlah_usaha"];
-
-    if (raw !== undefined && raw !== null) {
-      const value = parseFloat(raw);
-
-      if (!isNaN(value)) {
-        totalUsaha += value;
-      }
-    }
+    const val = Number(f.properties.jumlah_usaha);
+    if (!isNaN(val)) totalUsaha += val;
   });
 
   document.getElementById("kpi-usaha").innerText =
@@ -158,59 +202,39 @@ function updateKPI(features) {
 }
 
 // ===============================
-// HITUNG TOTAL USAHA (FINAL FIX)
+// UPDATE KBLI (PAKAI CACHE)
 // ===============================
-function hitungTotalUsaha(props) {
-  const value = props.jumlah_usaha;
+function updateKBLIByKecamatan(selectedKec) {
+  const sourceAgg = selectedKec
+    ? kbliCacheByKecamatan[selectedKec] || {}
+    : kbliCacheAll;
 
-  if (!isNaN(Number(value))) {
-    return Number(value);
-  }
+  const sortedKBLI = Object.entries(sourceAgg).sort((a, b) => b[1] - a[1]);
 
-  return 0;
+  currentKBLIData = sortedKBLI.map(([kode, total]) => ({
+    kode,
+    nama: kbliReference[kode] || "Deskripsi belum tersedia",
+    total,
+  }));
+
+  renderKBLITable(currentKBLIData);
 }
-
-// ==========================
-// SATELLITE PREVIEW MAP
-// ==========================
-const satelliteMap = L.map("satelliteMap", {
-  zoomControl: false,
-  attributionControl: false,
-}).setView([-0.7, 100.9], 11);
-
-// Basemap Satelit (Esri)
-L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-  { maxZoom: 19 },
-).addTo(satelliteMap);
-
-// Marker untuk titik tengah desa
-let satelliteMarker = null;
 
 // ===============================
 // UPDATE MAP
 // ===============================
 function updateMap(geoJson) {
-  // ==========================
-  // HAPUS LAYER LAMA
-  // ==========================
   if (filteredLayer) {
     map.removeLayer(filteredLayer);
     selectedFeature = null;
   }
 
-  // ==========================
-  // CARI NILAI MAKSIMUM USAHA
-  // ==========================
   let maxUsaha = 0;
   geoJson.features.forEach((f) => {
-    const value = Number(f.properties.jumlah_usaha) || 0;
-    if (value > maxUsaha) maxUsaha = value;
+    const val = Number(f.properties.jumlah_usaha) || 0;
+    if (val > maxUsaha) maxUsaha = val;
   });
 
-  // ==========================
-  // BUAT LAYER BARU
-  // ==========================
   filteredLayer = L.geoJson(geoJson, {
     style: function (feature) {
       const total = Number(feature.properties.jumlah_usaha) || 0;
@@ -223,19 +247,14 @@ function updateMap(geoJson) {
         color: "#555",
       };
     },
-
     onEachFeature: function (feature, layer) {
-      layer.bindTooltip(feature.properties.nmdesa, {
-        direction: "top",
-      });
+      layer.bindTooltip(feature.properties.nmdesa);
 
       layer.on("click", function () {
-        // Reset style sebelumnya
         if (selectedFeature) {
           filteredLayer.resetStyle(selectedFeature);
         }
 
-        // Highlight desa terpilih
         layer.setStyle({
           weight: 3,
           color: "#000",
@@ -243,59 +262,36 @@ function updateMap(geoJson) {
 
         selectedFeature = layer;
 
-        // ==========================
-        // UPDATE DETAIL TABLE
-        // ==========================
         updateDetailTable(feature.properties);
 
         const bounds = layer.getBounds();
         const center = bounds.getCenter();
 
-        // ==========================
-        // ZOOM PETA UTAMA
-        // ==========================
-        map.flyToBounds(bounds, { duration: 0.8 });
+        map.fitBounds(bounds);
+        satelliteMap.setView(center, 17);
 
-        // ==========================
-        // ZOOM SATELIT LEBIH DEKAT
-        // ==========================
-        satelliteMap.flyTo(center, 17, {
-          duration: 0.8,
-        });
-
-        // Hapus marker lama
         if (satelliteMarker) {
           satelliteMap.removeLayer(satelliteMarker);
         }
 
-        // Tambah marker baru
         satelliteMarker = L.marker(center).addTo(satelliteMap);
 
-        // ==========================
-        // UPDATE NAMA NAGARI
-        // ==========================
         document.getElementById("selected-nagari-name").innerText =
           feature.properties.nmdesa.toUpperCase();
 
-        // ==========================
-        // SEMBUNYIKAN INSTRUKSI
-        // ==========================
         const instruction = document.getElementById("satellite-instruction");
-        if (instruction) {
-          instruction.style.display = "none";
-        }
+        if (instruction) instruction.style.display = "none";
       });
     },
   }).addTo(map);
 
-  // Auto fit jika ada layer
   if (filteredLayer.getLayers().length > 0) {
     map.fitBounds(filteredLayer.getBounds());
   }
 }
 
 // ===============================
-// DETAIL TABLE (FINAL STABLE)
+// DETAIL TABLE
 // ===============================
 function updateDetailTable(properties) {
   const tableBody = document.getElementById("detail-table-body");
@@ -312,15 +308,10 @@ function updateDetailTable(properties) {
   let kbliData = [];
 
   Object.keys(properties).forEach((key) => {
-    // Hanya kolom 6 digit angka
     if (/^\d{5}$/.test(key)) {
       const value = Number(properties[key]);
-
       if (!isNaN(value) && value > 0) {
-        kbliData.push({
-          kode: key,
-          nilai: value,
-        });
+        kbliData.push({ kode: key, nilai: value });
       }
     }
   });
@@ -328,28 +319,55 @@ function updateDetailTable(properties) {
   kbliData.sort((a, b) => b.nilai - a.nilai);
   const top5 = kbliData.slice(0, 5);
 
-  // Nama Desa
-  let row1 = tableBody.insertRow();
-  row1.insertCell().textContent = "Nama Desa";
-  row1.insertCell().textContent = properties.nmdesa;
-
-  // Total Usaha
-  let row2 = tableBody.insertRow();
-  row2.insertCell().textContent = "Jumlah Usaha";
-  row2.insertCell().textContent = totalUsaha.toLocaleString("id-ID");
-
-  // Separator
-  let separator = tableBody.insertRow();
-  separator.insertCell().textContent = "Top 5 KBLI";
-  separator.insertCell().textContent = "";
+  tableBody.innerHTML += `
+    <tr><td>Nama Desa</td><td>${properties.nmdesa}</td></tr>
+    <tr><td>Jumlah Usaha</td><td>${totalUsaha.toLocaleString("id-ID")}</td></tr>
+    <tr><td colspan="2"><strong>Top 5 KBLI</strong></td></tr>
+  `;
 
   top5.forEach((item) => {
-    let row = tableBody.insertRow();
-
     const namaKBLI = kbliReference[item.kode] || "Deskripsi belum tersedia";
 
-    row.insertCell().textContent = `KBLI ${item.kode} - ${namaKBLI}`;
-
-    row.insertCell().textContent = item.nilai.toLocaleString("id-ID");
+    tableBody.innerHTML += `
+      <tr>
+        <td>KBLI ${item.kode} - ${namaKBLI}</td>
+        <td>${item.nilai.toLocaleString("id-ID")}</td>
+      </tr>
+    `;
   });
+}
+
+// ===============================
+// RENDER KBLI TABLE
+// ===============================
+function renderKBLITable(data) {
+  const tbody = document.getElementById("kbli-table-body");
+
+  if (!data || data.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="2" class="text-center text-muted">
+          Data tidak ditemukan
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  let html = "";
+  data.forEach((item) => {
+    html += `
+      <tr>
+        <td>
+          <strong>${item.kode}</strong><br>
+          <small class="text-muted">${item.nama}</small>
+        </td>
+        <td class="text-end fw-semibold">
+          ${item.total.toLocaleString("id-ID")}
+        </td>
+      </tr>
+    `;
+  });
+
+  tbody.innerHTML = html;
 }
