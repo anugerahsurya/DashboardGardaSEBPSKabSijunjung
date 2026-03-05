@@ -1097,6 +1097,108 @@ strong {
   color: #fff;
 }
 
+/* ==============
+Kegiatan SE
+=============== */
+.events-section{
+  padding:4rem 0;
+  background:#f9f9f9;
+}
+
+.events-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:2rem;
+}
+
+.events-header h2{
+  font-size:2rem;
+}
+
+.events-nav button{
+  border:none;
+  background:#f28c38;
+  color:white;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  font-size:20px;
+  cursor:pointer;
+  margin-left:10px;
+  transition:0.3s;
+}
+
+.events-nav button:hover{
+  background:#d96f1f;
+}
+
+/* wrapper slider */
+
+.events-wrapper{
+  display:flex;
+  gap:20px;
+  overflow:hidden;
+  scroll-behavior:smooth;
+}
+
+/* event card */
+
+.event-card{
+  min-width:300px;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.event-card:hover{
+  transform:translateY(-5px);
+}
+
+.event-card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+}
+
+.event-date{
+  position:absolute;
+  background:#f28c38;
+  color:white;
+  padding:10px;
+  border-radius:8px;
+  margin:10px;
+  text-align:center;
+}
+
+.event-date h4{
+  margin:0;
+  font-size:15px;
+  color: #ddd;
+  font-weight: 500;
+}
+
+.event-date span{
+  font-size:12px;
+}
+
+.event-info{
+  padding:15px;
+}
+
+.event-info h5{
+  font-size:16px;
+  margin-bottom:5px;
+}
+
+.event-info p{
+  font-size:14px;
+  color:#666;
+}
+
+
 /* LINKS */
 .footer-links a {
   display: block;

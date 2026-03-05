@@ -323,10 +323,12 @@
 
                     <div class="desc-row">
                       <p class="description">
-                        Pendataan lanjutan untuk mendukung pembangunan ekonomi,
-                        mencakup hampir semua sektor kecuali pertanian.
-                        Pendataan lanjutan untuk mendukung pembangunan ekonomi,
-                        mencakup hampir semua sektor kecuali pertanian.
+                        Sensus ekonomi pertama yang diselenggarakan oleh BPS.
+                        Pelaksanaan sensus ini merupakan penggabungan dari
+                        beberapa sensus sektoral yang sebelumnya dilakukan
+                        secara terpisah, seperti Sensus Pertambangan dan
+                        Penggalian, Sensus Industri, Sensus Konstruksi, Sensus
+                        Perdagangan, serta sensus di sektor ekonomi lainnya.
                       </p>
                       <img
                         src="images/sejarah/1986.png"
@@ -350,10 +352,15 @@
                       />
 
                       <p class="description">
-                        Pendataan lanjutan untuk mendukung pembangunan ekonomi,
-                        mencakup hampir semua sektor kecuali pertanian.
-                        Pendataan lanjutan untuk mendukung pembangunan ekonomi,
-                        mencakup hampir semua sektor kecuali pertanian.
+                        Sensus ini merupakan pengembangan dari Sensus Ekonomi
+                        1986 yang bertujuan untuk mendukung pelaksanaan
+                        Pembangunan Jangka Panjang Kedua. Sensus ini mencakup
+                        seluruh perusahaan atau usaha yang berada di wilayah
+                        Indonesia, baik yang memiliki lokasi usaha tetap maupun
+                        yang tidak tetap. Sektor ekonomi yang didata meliputi
+                        pertambangan dan penggalian, industri, listrik, gas, dan
+                        air, konstruksi, perdagangan, transportasi, lembaga
+                        keuangan, serta berbagai sektor jasa.
                       </p>
                     </div>
                   </div>
@@ -369,10 +376,14 @@
 
                     <div class="desc-row">
                       <p class="description">
-                        Pendataan lanjutan untuk mendukung pembangunan ekonomi,
-                        mencakup hampir semua sektor kecuali pertanian.
-                        Pendataan lanjutan untuk mendukung pembangunan ekonomi,
-                        mencakup hampir semua sektor kecuali pertanian.
+                        Kegiatan ini memiliki arti dan peran yang sangat penting
+                        dalam mengidentifikasi populasi usaha, memperbarui
+                        direktori serta kerangka sampel, dan memetakan
+                        persebaran usaha di Indonesia setelah krisis ekonomi
+                        tahun 1997. Pendataan ini tidak mencakup lapangan usaha
+                        di sektor pertanian (Kategori A dan B) serta sektor
+                        administrasi pemerintahan, pertahanan, dan jaminan
+                        sosial wajib (Kategori L).
                       </p>
                       <img
                         src="images/sejarah/2006.png"
@@ -396,10 +407,16 @@
                       />
 
                       <p class="description">
-                        Pendataan lanjutan untuk mendukung pembangunan ekonomi,
-                        mencakup hampir semua sektor kecuali pertanian.
-                        Pendataan lanjutan untuk mendukung pembangunan ekonomi,
-                        mencakup hampir semua sektor kecuali pertanian.
+                        Sensus ini dilaksanakan untuk memperoleh gambaran
+                        mengenai kinerja dan struktur perekonomian Indonesia
+                        berdasarkan wilayah, jenis lapangan usaha, serta skala
+                        usaha. Kegiatan yang dicakup dalam sensus ini tidak
+                        meliputi sektor pertanian, kehutanan, dan perikanan
+                        (Kategori A); administrasi pemerintahan, pertahanan, dan
+                        jaminan sosial wajib (Kategori O); kegiatan rumah tangga
+                        sebagai pemberi kerja; serta kegiatan rumah tangga yang
+                        menghasilkan barang dan jasa untuk memenuhi kebutuhan
+                        sendiri (Kategori T).
                       </p>
                     </div>
                   </div>
@@ -418,10 +435,13 @@
 
                     <div class="desc-row">
                       <p class="description">
-                        Pendataan lanjutan untuk mendukung pembangunan ekonomi,
-                        mencakup hampir semua sektor kecuali pertanian.
-                        Pendataan lanjutan untuk mendukung pembangunan ekonomi,
-                        mencakup hampir semua sektor kecuali pertanian.
+                        Sensus ini merupakan Sensus Ekonomi (SE) kelima yang
+                        dilakukan oleh BPS. Kegiatan ini akan menyediakan
+                        informasi struktur ekonomi, informasi karakteristik
+                        usaha serta informasi ekonomi digital dan lingkungan.
+                        Sensus ini akan menjawab beberapa isu-isu penting
+                        seperti daya saing usaha, peta perekonomian wilayah, dan
+                        kontribusi UMKM.
                       </p>
                       <img
                         src="images/sejarah/2026.png"
@@ -558,7 +578,7 @@
 
             <a href="dashboard.html" class="informasi-card informasi-button">
               <i class="bi bi-bookmarks-fill"></i>
-              <p>Identifikasi KBLI Dominan Daerah </p>
+              <p>Identifikasi KBLI Dominan Daerah</p>
             </a>
           </div>
         </div>
@@ -743,151 +763,82 @@
         </div>
       </section> -->
 
-      <!-- <section class="events-section section-bg section-padding" id="section_4">
+      <section class="events-section">
         <div class="container">
-          <div class="row">
-            <div class="col-lg-12 col-12">
-              <h2 class="mb-lg-3">Upcoming Events</h2>
+          <div class="events-header">
+            <h2>Upcoming Events</h2>
+
+            <div class="events-nav">
+              <button id="prevEvent">‹</button>
+              <button id="nextEvent">›</button>
             </div>
+          </div>
 
-            <div class="row custom-block mb-3">
-              <div
-                class="col-lg-2 col-md-4 col-12 order-2 order-md-0 order-lg-0"
-              >
-                <div
-                  class="custom-block-date-wrap d-flex d-lg-block d-md-block align-items-center mt-3 mt-lg-0 mt-md-0"
-                >
-                  <h6
-                    class="custom-block-date mb-lg-1 mb-0 me-3 me-lg-0 me-md-0"
-                  >
-                    24
-                  </h6>
+          <div class="events-wrapper" id="eventsWrapper">
+            <div class="event-card">
+              <div class="event-date">
+                <h4>26</h4>
+                <span>Feb</span><br>
+                
 
-                  <strong class="text-white">Feb 2048</strong>
-                </div>
               </div>
 
-              <div class="col-lg-4 col-md-8 col-12 order-1 order-lg-0">
-                <div class="custom-block-image-wrap">
-                  <a href="event-detail.html">
-                    <img
-                      src="images/professional-golf-player.jpg"
-                      class="custom-block-image img-fluid"
-                      alt=""
-                    />
+              <img src="images/sosialisasi/3.jpg" />
 
-                    <i class="custom-block-icon bi-link"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-12 order-3 order-lg-0">
-                <div class="custom-block-info mt-2 mt-lg-0">
-                  <a href="event-detail.html" class="events-title mb-3"
-                    >Private activities</a
-                  >
-
-                  <p class="mb-0">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
-
-                  <div class="d-flex flex-wrap border-top mt-4 pt-3">
-                    <div class="mb-4 mb-lg-0">
-                      <div class="d-flex flex-wrap align-items-center mb-1">
-                        <span class="custom-block-span">Location:</span>
-
-                        <p class="mb-0">National Center, NYC</p>
-                      </div>
-
-                      <div class="d-flex flex-wrap align-items-center">
-                        <span class="custom-block-span">Ticket:</span>
-
-                        <p class="mb-0">$250</p>
-                      </div>
-                    </div>
-
-                    <div class="d-flex align-items-center ms-lg-auto">
-                      <a href="event-detail.html" class="btn custom-btn"
-                        >Buy Ticket</a
-                      >
-                    </div>
-                  </div>
-                </div>
+              <div class="event-info">
+                <h5>Sosialisasi SE2026  Saat Hari Statistik Nasional</h5>
+                <p>Mitra Statistik, Dinas KomInfo dan pensiunan BPS Kabupaten Sijunjung</p>
               </div>
             </div>
 
-            <div class="row custom-block custom-block-bg">
-              <div
-                class="col-lg-2 col-md-4 col-12 order-2 order-md-0 order-lg-0"
-              >
-                <div
-                  class="custom-block-date-wrap d-flex d-lg-block d-md-block align-items-center mt-3 mt-lg-0 mt-md-0"
-                >
-                  <h6
-                    class="custom-block-date mb-lg-1 mb-0 me-3 me-lg-0 me-md-0"
-                  >
-                    28
-                  </h6>
-
-                  <strong class="text-white">Feb 2048</strong>
-                </div>
+            <div class="event-card">
+              <div class="event-date">
+                <h4>28</h4>
+                <span>Feb</span>
               </div>
 
-              <div class="col-lg-4 col-md-8 col-12 order-1 order-lg-0">
-                <div class="custom-block-image-wrap">
-                  <a href="event-detail.html">
-                    <img
-                      src="images/girl-taking-selfie-with-friends-golf-field.jpg"
-                      class="custom-block-image img-fluid"
-                      alt=""
-                    />
+              <img
+                src="images/sosialisasi/1.jpg"
+              />
 
-                    <i class="custom-block-icon bi-link"></i>
-                  </a>
-                </div>
+              <div class="event-info">
+                <h5>Sosialisasi Sensus Ekonomi 2026</h5>
+                <p>OPD, Porkopimda, instansi Vertikal, BUMD</p>
+              </div>
+            </div>
+
+            <div class="event-card">
+              <div class="event-date">
+                <h4>02</h4>
+                <span>Mar</span>
               </div>
 
-              <div class="col-lg-6 col-12 order-3 order-lg-0">
-                <div class="custom-block-info mt-2 mt-lg-0">
-                  <a href="event-detail.html" class="events-title mb-3"
-                    >Group tournament activities</a
-                  >
+              <img src="images/sosialisasi/2.JPG" />
 
-                  <p class="mb-0">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
+              <div class="event-info">
+                <h5>Sosialisasi Sensus Ekonomi 2026 pada Kegiatan CFD</h5>
+                <p>Pelaku Ekonomi, Masyarakat Luas</p>
+              </div>
+            </div>
 
-                  <div class="d-flex flex-wrap border-top mt-4 pt-3">
-                    <div class="mb-4 mb-lg-0">
-                      <div class="d-flex flex-wrap align-items-center mb-1">
-                        <span class="custom-block-span">Location:</span>
+            <div class="event-card">
+              <div class="event-date">
+                <h4>05</h4>
+                <span>Mar</span>
+              </div>
 
-                        <p class="mb-0">National Center, NYC</p>
-                      </div>
+              <img
+                src="images/girl-taking-selfie-with-friends-golf-field.jpg"
+              />
 
-                      <div class="d-flex flex-wrap align-items-center">
-                        <span class="custom-block-span">Ticket:</span>
-
-                        <p class="mb-0">$350</p>
-                      </div>
-                    </div>
-
-                    <div class="d-flex align-items-center ms-lg-auto">
-                      <a href="event-detail.html" class="btn custom-btn"
-                        >Buy Ticket</a
-                      >
-                    </div>
-                  </div>
-                </div>
+              <div class="event-info">
+                <h5>Workshop</h5>
+                <p>Lorem ipsum dolor sit amet.</p>
               </div>
             </div>
           </div>
         </div>
-      </section> -->
+      </section>
 
       <!-- <section class="contact-section section-padding" id="section_5">
         <div class="container">
@@ -1016,7 +967,7 @@
 
             <div class="team-member">
               <img src="images/bukyezi.png" alt="Yezi Oktanofa" />
-              <h5>Yezi Oktanofa, SE</h5>
+              <h5>Yezi Ostanofa, SE</h5>
               <p>
                 Wakil Ketua Bidang Administrasi, Hubungan Masyarakat, dan
                 Manajemen Risiko
@@ -1053,42 +1004,38 @@
     </main>
 
     <footer class="site-footer">
-  <div class="container">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- LOGO & INSTANSI -->
+          <div class="footer-brand">
+            <img src="images/logobps.png" alt="Logo BPS" />
+            <h4>Badan Pusat Statistik</h4>
+            <p>Kabupaten Sijunjung</p>
+          </div>
 
-    <div class="footer-grid">
+          <!-- KONTAK -->
+          <div class="footer-contact">
+            <h5>Kontak</h5>
+            <p>Jl. Prof. M. Yamin, Muaro Sijunjung</p>
+            <p>Email: bps1307@bps.go.id</p>
+            <p>Telp: (0754) 20023</p>
+          </div>
 
-      <!-- LOGO & INSTANSI -->
-      <div class="footer-brand">
-        <img src="images/logobps.png" alt="Logo BPS">
-        <h4>Badan Pusat Statistik</h4>
-        <p>Kabupaten Sijunjung</p>
-      </div>
-
-      <!-- KONTAK -->
-      <div class="footer-contact">
-        <h5>Kontak</h5>
-        <p>Jl. Prof. M. Yamin, Muaro Sijunjung</p>
-        <p>Email: bps1307@bps.go.id</p>
-        <p>Telp: (0754) 20023</p>
-      </div>
-
-      <!-- LINK -->
-      <!-- <div class="footer-links">
+          <!-- LINK -->
+          <!-- <div class="footer-links">
         <h5>Tautan</h5>
         <a href="#">Beranda</a>
         <a href="#">Publikasi</a>
         <a href="#">Statistik</a>
         <a href="#">Kontak</a>
       </div> -->
+        </div>
 
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2026 Badan Pusat Statistik Kabupaten Sijunjung</p>
-    </div>
-
-  </div>
-</footer>
+        <div class="footer-bottom">
+          <p>© 2026 Badan Pusat Statistik Kabupaten Sijunjung</p>
+        </div>
+      </div>
+    </footer>
 
     <!-- JAVASCRIPT FILES -->
     <script src="js/jquery.min.js"></script>
@@ -1098,5 +1045,6 @@
     <script src="js/animated-headline.js"></script>
     <script src="js/modernizr.js"></script>
     <script src="js/custom.js"></script>
+    <script src="assets/js/new.js"></script>
   </body>
 </html>
