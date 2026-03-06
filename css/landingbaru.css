@@ -388,3 +388,49 @@
   margin: 0;
   font-weight: 500;
 }
+
+/* Divider */
+.team-divider {
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff8c3a, #f5a623);
+  margin: 40px auto 25px auto;
+  border-radius: 5px;
+}
+
+/* Container tombol */
+.team-more-btn {
+  margin-bottom: 10px;
+}
+
+/* Tombol */
+.btn-team-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  background: linear-gradient(135deg, #f79039, #ff9a48);
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.btn-team-more:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  color: white;
+}
+
+/* animasi icon */
+.btn-team-more i {
+  transition: transform 0.3s ease;
+}
+
+.btn-team-more:hover i {
+  transform: translateX(4px);
+}
