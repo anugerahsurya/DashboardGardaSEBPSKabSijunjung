@@ -299,11 +299,16 @@ function updateDetailTable(properties) {
 
   if (!properties) {
     tableBody.innerHTML =
-      '<tr><td colspan="2">Klik desa untuk melihat detail.</td></tr>';
+      '<tr><td colspan="2">Klik nagari untuk melihat detail.</td></tr>';
     return;
   }
 
   const totalUsaha = Number(properties.jumlah_usaha) || 0;
+
+  // 🔹 ambil data tambahan dari geojson
+  const jumlahJorong = Number(properties.jml_jrg) || 0;
+  const jumlahPenduduk = Number(properties.jml_pdd) || 0;
+  const luasWilayah = Number(properties.luas_wil) || 0;
 
   let kbliData = [];
 
@@ -320,8 +325,11 @@ function updateDetailTable(properties) {
   const top5 = kbliData.slice(0, 5);
 
   tableBody.innerHTML += `
-    <tr><td>Nama Desa</td><td>${properties.nmdesa}</td></tr>
+    <tr><td>Nama Nagari</td><td>${properties.nmdesa}</td></tr>
     <tr><td>Jumlah Usaha</td><td>${totalUsaha.toLocaleString("id-ID")}</td></tr>
+    <tr><td>Jumlah Jorong</td><td>${jumlahJorong.toLocaleString("id-ID")}</td></tr>
+    <tr><td>Jumlah Penduduk</td><td>${jumlahPenduduk.toLocaleString("id-ID")}</td></tr>
+    <tr><td>Luas Wilayah</td><td>${luasWilayah.toLocaleString("id-ID")} km²</td></tr>
     <tr><td colspan="2"><strong>Top 5 KBLI</strong></td></tr>
   `;
 
