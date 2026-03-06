@@ -1135,12 +1135,24 @@ Kegiatan SE
 
 /* wrapper slider */
 
+/* container slider */
 .events-wrapper{
   display:flex;
-  gap:20px;
-  overflow:hidden;
+  gap:1.25rem;
+  overflow-x:auto;
   scroll-behavior:smooth;
+  scroll-snap-type:x mandatory;
+
+  /* sembunyikan scrollbar */
+  -ms-overflow-style: none;  /* IE dan Edge lama */
+  scrollbar-width: none;     /* Firefox */
 }
+
+/* Chrome, Safari, Edge */
+.events-wrapper::-webkit-scrollbar{
+  display:none;
+}
+
 
 /* event card */
 
@@ -1642,6 +1654,7 @@ Section Informasi
   letter-spacing: 0.03em;
 }
 
+
 /* HEADER */
 .informasi-header {
   text-align: center;
@@ -1783,5 +1796,11 @@ Section Informasi
   .custom-btn {
     font-size: 12px;
     padding: 4px 12px;
+  }
+}
+
+@media (max-width: 768px){
+  .events-nav{
+    display:none;
   }
 }
