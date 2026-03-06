@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Upload Kegiatan</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: #f5f6f8;
+      }
+
+      .card {
+        border-radius: 12px;
+      }
+
+      #preview {
+        max-height: 250px;
+        object-fit: cover;
+        border-radius: 8px;
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h4 class="mb-4 text-center">Upload Kegiatan</h4>
+
+              <!-- STATUS MESSAGE -->
+              <div id="statusMessage"></div>
+
+              <form id="kegiatanForm">
+                <div class="mb-3">
+                  <label class="form-label">Upload Gambar</label>
+                  <input
+                    type="file"
+                    id="gambar"
+                    class="form-control"
+                    accept="image/*"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3 text-center">
+                  <img id="preview" class="img-fluid" />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Tanggal Kegiatan</label>
+                  <input
+                    type="date"
+                    id="tanggal"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Nama Kegiatan</label>
+                  <input
+                    type="text"
+                    id="nama"
+                    class="form-control"
+                    placeholder="Nama kegiatan"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Deskripsi Singkat</label>
+                  <textarea
+                    id="deskripsi"
+                    class="form-control"
+                    rows="3"
+                    placeholder="Deskripsi kegiatan"
+                  ></textarea>
+                </div>
+
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary">
+                    Upload Kegiatan
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREVIEW GAMBAR -->
+    <script>
+      const gambarInput = document.getElementById("gambar");
+      const preview = document.getElementById("preview");
+
+      gambarInput.addEventListener("change", function () {
+        const file = this.files[0];
+
+        if (file) {
+          preview.src = URL.createObjectURL(file);
+          preview.style.display = "block";
+        }
+      });
+    </script>
+
+    <!-- SCRIPT ADMIN -->
+    <script type="module" src="js/supabase/kegiatanAdmin.js"></script>
+  </body>
+</html>
