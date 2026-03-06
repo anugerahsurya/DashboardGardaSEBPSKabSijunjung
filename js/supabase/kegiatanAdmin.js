@@ -3,6 +3,68 @@ import { supabase } from "./supabaseClient.js";
 const form = document.getElementById("kegiatanForm");
 const statusBox = document.getElementById("statusMessage");
 
+/* =========================
+IMAGE COMPRESS FUNCTION
+========================= */
+
+async function compressImage(file, maxSizeMB = 1) {
+  const maxSize = maxSizeMB * 1024 * 1024;
+
+  // jika sudah kecil tidak perlu compress
+  if (file.size <= maxSize) {
+    return file;
+  }
+
+  return new Promise((resolve) => {
+    const img = new Image();
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      img.src = e.target.result;
+    };
+
+    img.onload = () => {
+      const MAX_WIDTH = 1920;
+
+      let width = img.width;
+      let height = img.height;
+
+      // resize jika terlalu besar
+      if (width > MAX_WIDTH) {
+        height = height * (MAX_WIDTH / width);
+        width = MAX_WIDTH;
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+
+      ctx.drawImage(img, 0, 0, width, height);
+
+      canvas.toBlob(
+        (blob) => {
+          const compressedFile = new File([blob], file.name, {
+            type: "image/jpeg",
+            lastModified: Date.now(),
+          });
+
+          resolve(compressedFile);
+        },
+        "image/jpeg",
+        0.8,
+      );
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
+/* =========================
+FORM SUBMIT
+========================= */
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -13,7 +75,12 @@ form.addEventListener("submit", async (e) => {
   `;
 
   try {
-    const file = document.getElementById("gambar").files[0];
+    let file = document.getElementById("gambar").files[0];
+
+    if (!file) {
+      throw new Error("File gambar belum dipilih");
+    }
+
     const waktuKegiatan = document.getElementById("tanggal").value;
     const namaKegiatan = document.getElementById("nama").value;
     const deskripsi = document.getElementById("deskripsi").value;
@@ -21,11 +88,17 @@ form.addEventListener("submit", async (e) => {
     const offsetX = parseFloat(document.getElementById("offsetX").value) || 0;
     const offsetY = parseFloat(document.getElementById("offsetY").value) || 0;
 
+    /* =========================
+    COMPRESS IMAGE
+    ========================= */
+
+    file = await compressImage(file, 1);
+
     const fileName = Date.now() + "_" + file.name;
 
-    // =========================
-    // Upload ke storage
-    // =========================
+    /* =========================
+    UPLOAD STORAGE
+    ========================= */
 
     const { error: uploadError } = await supabase.storage
       .from("kegiatan-images")
@@ -33,24 +106,26 @@ form.addEventListener("submit", async (e) => {
 
     if (uploadError) throw uploadError;
 
-    // =========================
-    // Ambil URL publik
-    // =========================
+    /* =========================
+    GET PUBLIC URL
+    ========================= */
 
     const { data } = supabase.storage
       .from("kegiatan-images")
       .getPublicUrl(fileName);
 
-    // =========================
-    // Simpan ke tabel
-    // =========================
+    const imageUrl = data.publicUrl;
+
+    /* =========================
+    INSERT DATABASE
+    ========================= */
 
     const { error: insertError } = await supabase.from("Kegiatan").insert([
       {
         waktuKegiatan,
         namaKegiatan,
         deskripsi,
-        url_gambar: data.publicUrl,
+        url_gambar: imageUrl,
         offsetX,
         offsetY,
       },

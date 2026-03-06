@@ -23,7 +23,7 @@
   <body>
     <!-- NAVBAR -->
 
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg sticky-top">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="index.html">
           <img
@@ -154,11 +154,34 @@ PREVIEW AREA
         </form>
       </div>
     </div>
+    <div id="loginOverlay">
+      <div class="login-box">
+        <h4>Admin Login</h4>
+
+        <input
+          type="text"
+          id="adminUser"
+          placeholder="Username"
+          class="form-control mb-2"
+        />
+
+        <input
+          type="password"
+          id="adminPass"
+          placeholder="Password"
+          class="form-control mb-3"
+        />
+
+        <button id="loginBtn" class="btn btn-primary w-100">Login</button>
+
+        <div id="loginError" class="text-danger mt-2"></div>
+      </div>
+    </div>
 
     <!-- SCRIPT -->
 
     <script type="module" src="js/formInput.js"></script>
-
+    <script type="module" src="js/supabase/proteksiAdmin.js"></script>
     <script type="module" src="js/supabase/kegiatanAdmin.js"></script>
   </body>
 </html>
