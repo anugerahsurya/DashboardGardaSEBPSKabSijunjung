@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Admin Upload Kegiatan</title>
+
+    <link rel="icon" type="image/png" href="images/logosensus2026.png" />
 
     <!-- Bootstrap -->
     <link
@@ -11,110 +14,151 @@
       rel="stylesheet"
     />
 
-    <style>
-      body {
-        background: #f5f6f8;
-      }
-
-      .card {
-        border-radius: 12px;
-      }
-
-      #preview {
-        max-height: 250px;
-        object-fit: cover;
-        border-radius: 8px;
-        display: none;
-      }
-    </style>
+    <link href="css/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/templatemo-tiya-golf-club.css" rel="stylesheet" />
+    <link href="css/landingbaru.css" rel="stylesheet" />
+    <link href="css/admin.css" rel="stylesheet" />
   </head>
 
   <body>
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <img
+            src="images/logoBPS.png"
+            class="navbar-brand-image img-fluid"
+            alt="BPS"
+          />
+
+          <span class="navbar-brand-text">
+            BADAN PUSAT STATISTIK
+            <small>Kabupaten Sijunjung</small>
+          </span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-lg-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">Dashboard</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- FORM -->
+
     <div class="container py-5">
-      <div class="row justify-content-center">
-        <div class="col-lg-6">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <h4 class="mb-4 text-center">Upload Kegiatan</h4>
+      <div class="card shadow-sm p-4">
+        <h4 class="mb-4 text-center">Upload Kegiatan</h4>
 
-              <!-- STATUS MESSAGE -->
-              <div id="statusMessage"></div>
+        <!-- STATUS MESSAGE -->
+        <div id="statusMessage"></div>
 
-              <form id="kegiatanForm">
-                <div class="mb-3">
-                  <label class="form-label">Upload Gambar</label>
-                  <input
-                    type="file"
-                    id="gambar"
-                    class="form-control"
-                    accept="image/*"
-                    required
-                  />
+        <form id="kegiatanForm">
+          <!-- hidden crop data -->
+
+          <input type="hidden" id="offsetX" name="offsetX" />
+          <input type="hidden" id="offsetY" name="offsetY" />
+
+          <div class="row g-4">
+            <!-- ======================
+INPUT FORM
+====================== -->
+
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <label class="form-label">Nama Kegiatan</label>
+
+                <input
+                  type="text"
+                  id="nama"
+                  class="form-control"
+                  placeholder="Masukkan nama kegiatan"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Tanggal Kegiatan</label>
+
+                <input type="date" id="tanggal" class="form-control" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Deskripsi</label>
+
+                <textarea
+                  id="deskripsi"
+                  class="form-control"
+                  rows="4"
+                  placeholder="Deskripsi kegiatan"
+                ></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Upload Gambar Cover</label>
+
+                <input
+                  type="file"
+                  id="gambar"
+                  class="form-control"
+                  accept="image/png,image/jpeg,image/jpg"
+                  required
+                />
+
+                <small class="text-muted">
+                  Gunakan gambar landscape agar hasil lebih optimal.
+                </small>
+              </div>
+
+              <button class="btn btn-primary w-100">Upload Kegiatan</button>
+            </div>
+
+            <!-- ======================
+PREVIEW AREA
+====================== -->
+
+            <div class="col-lg-6">
+              <label class="form-label"> Preview Cover Event </label>
+
+              <div class="preview-container">
+                <div class="preview-placeholder">
+                  Pilih gambar untuk preview
                 </div>
 
-                <div class="mb-3 text-center">
-                  <img id="preview" class="img-fluid" />
-                </div>
+                <img id="previewImage" />
+              </div>
 
-                <div class="mb-3">
-                  <label class="form-label">Tanggal Kegiatan</label>
-                  <input
-                    type="date"
-                    id="tanggal"
-                    class="form-control"
-                    required
-                  />
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label">Nama Kegiatan</label>
-                  <input
-                    type="text"
-                    id="nama"
-                    class="form-control"
-                    placeholder="Nama kegiatan"
-                    required
-                  />
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label">Deskripsi Singkat</label>
-                  <textarea
-                    id="deskripsi"
-                    class="form-control"
-                    rows="3"
-                    placeholder="Deskripsi kegiatan"
-                  ></textarea>
-                </div>
-
-                <div class="d-grid">
-                  <button type="submit" class="btn btn-primary">
-                    Upload Kegiatan
-                  </button>
-                </div>
-              </form>
+              <small class="text-muted">
+                Geser gambar untuk menentukan bagian yang tampil pada card
+                event.
+              </small>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
 
-    <!-- PREVIEW GAMBAR -->
-    <script>
-      const gambarInput = document.getElementById("gambar");
-      const preview = document.getElementById("preview");
+    <!-- SCRIPT -->
 
-      gambarInput.addEventListener("change", function () {
-        const file = this.files[0];
+    <script type="module" src="js/formInput.js"></script>
 
-        if (file) {
-          preview.src = URL.createObjectURL(file);
-          preview.style.display = "block";
-        }
-      });
-    </script>
-
-    <!-- SCRIPT ADMIN -->
     <script type="module" src="js/supabase/kegiatanAdmin.js"></script>
   </body>
 </html>

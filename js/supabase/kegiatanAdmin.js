@@ -18,27 +18,41 @@ form.addEventListener("submit", async (e) => {
     const namaKegiatan = document.getElementById("nama").value;
     const deskripsi = document.getElementById("deskripsi").value;
 
+    const offsetX = parseFloat(document.getElementById("offsetX").value) || 0;
+    const offsetY = parseFloat(document.getElementById("offsetY").value) || 0;
+
     const fileName = Date.now() + "_" + file.name;
 
-    // Upload gambar ke storage
+    // =========================
+    // Upload ke storage
+    // =========================
+
     const { error: uploadError } = await supabase.storage
       .from("kegiatan-images")
       .upload(fileName, file);
 
     if (uploadError) throw uploadError;
 
-    // Ambil URL publik gambar
+    // =========================
+    // Ambil URL publik
+    // =========================
+
     const { data } = supabase.storage
       .from("kegiatan-images")
       .getPublicUrl(fileName);
 
-    // Simpan ke tabel kegiatan
+    // =========================
+    // Simpan ke tabel
+    // =========================
+
     const { error: insertError } = await supabase.from("Kegiatan").insert([
       {
         waktuKegiatan,
         namaKegiatan,
         deskripsi,
         url_gambar: data.publicUrl,
+        offsetX,
+        offsetY,
       },
     ]);
 
@@ -51,7 +65,6 @@ form.addEventListener("submit", async (e) => {
     `;
 
     form.reset();
-    document.getElementById("preview").style.display = "none";
 
     setTimeout(() => {
       statusBox.innerHTML = "";
