@@ -476,14 +476,14 @@ strong {
 .navbar-brand-text {
   line-height: normal;
   margin-left: 9px;
-  font-size: 20px;
+  font-size: 1.25rem;
   position: relative;
   bottom: 5px;
 }
 
 .navbar-brand-text small {
   display: block;
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -668,13 +668,13 @@ strong {
   padding-bottom: 50px;
   height: 100vh;
   min-height: 670px;
-  margin-bottom: -90px;
+  margin-bottom: 0px;
 }
 
 .hero-50 {
   height: auto;
   min-height: 540px;
-  margin-bottom: -100px;
+  margin-bottom: 0[x];
 }
 
 .hero-50 .container + svg {
@@ -1123,7 +1123,7 @@ Kegiatan SE
   width:40px;
   height:40px;
   border-radius:50%;
-  font-size:20px;
+  font-size:1.25px;
   cursor:pointer;
   margin-left:10px;
   transition:0.3s;
@@ -1155,6 +1155,12 @@ Kegiatan SE
 
 
 /* event card */
+.events-section{
+   background:
+  url("images/pattern2.jpg"),
+  linear-gradient(135deg,#f9c85b,#eaa134);
+  background-size: cover, 300px, cover;
+}
 
 .event-card{
   min-width:300px;
@@ -1210,12 +1216,12 @@ Kegiatan SE
 }
 
 .event-info h5{
-  font-size:16px;
+  font-size:1rem;
   margin-bottom:5px;
 }
 
 .event-info p{
-  font-size:14px;
+  font-size:0.875rem;
   color:#666;
 }
 
@@ -1588,10 +1594,14 @@ Section insert section
 }
 
 /* GRID */
-.insight-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13.75rem, 1fr)); /* 220px */
-  gap: 1.875rem; /* 30px */
+
+
+.insight-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+  gap:2rem;
+  max-width:900px;
+  margin:auto; /* supaya grid tetap di tengah */
 }
 
 /* BUTTON CARD */
@@ -1750,7 +1760,47 @@ Section Vidio Dukungan
 /* SECTION */
 .video-section{
   padding:5rem 0;
-  background:#f8f9fa;
+   background:
+  url("images/pattern2.jpg"),
+  linear-gradient(135deg,#f9c85b,#eaa134);
+  background-size: cover, 300px, cover;
+
+}
+
+.video-section::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:#f79039;
+  filter:blur(180px);
+  opacity:0.3;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:0;
+}
+
+.video-section::after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  background:#FEBD26;
+  filter:blur(150px);
+  bottom:-100px;
+  right:-100px;
+  opacity:0.4;
+}
+
+.video-wrapper{
+  position:relative;
+  z-index:2;
+}
+
+.video-wrapper iframe{
+  border-radius:20px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.3);
 }
 
 .video-slider{
@@ -1761,6 +1811,7 @@ Section Vidio Dukungan
   scroll-snap-type:x mandatory;
 
   scrollbar-width:none;
+  justify-content: center;
 }
 
 .video-slider::-webkit-scrollbar{
@@ -1783,12 +1834,140 @@ Section Vidio Dukungan
 }
 
 /* SHORT VIDEO */
+
+
 .video-card.short{
   width:14rem;
+  aspect-ratio:9/16;
 }
 
 .video-card.short iframe{
-  aspect-ratio:9/16;
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+/* SECTIOON SWIPER IG */
+.ig-feed-section{
+  padding:2rem 0;
+   background: linear-gradient(
+      rgba(0,0,0,0.1),
+      rgba(0,0,0,0.1)
+    ),
+    linear-gradient(135deg,#FEBD26,#f79039);
+}
+
+/* .ig-feed-section::before{
+  content:"";
+  position:absolute;
+  width:400px;
+  height:400px;
+  background:#FEBD26;
+  filter:blur(180px);
+  top:-150px;
+  left:-150px;
+  opacity:0.4;
+} */
+
+.ig-slider{
+  position:relative;
+  width:100%;
+  height:520px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.ig-wrapper{
+  position:relative;
+  width:100%;
+  height:100%;
+}
+
+.ig-slide{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(.6);
+  opacity:0;
+  transition: all .5s ease;
+}
+
+.ig-slide img{
+  width:380px;
+  max-height:480px;
+  object-fit:contain;
+  border-radius:20px;
+}
+
+.ig-slide.active{
+  transform:translate(-50%,-50%) scale(1);
+  opacity:1;
+  z-index:5;
+}
+
+.ig-slide.active img{
+  box-shadow:0 30px 60px rgba(0,0,0,0.35);
+}
+
+.ig-slide.prev{
+  transform:translate(-140%,-50%) scale(.8);
+  opacity:.7;
+  z-index:2;
+}
+
+.ig-slide.next{
+  transform:translate(40%,-50%) scale(.8);
+  opacity:.7;
+  z-index:2;
+}
+
+/* tombol */
+.ig-prev,
+.ig-next{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:#f79039;
+  border:none;
+  color:white;
+  font-size:22px;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:10; /* penting */
+}
+
+.ig-prev{
+  left:20px;
+}
+
+.ig-next{
+  right:20px;
+}
+
+.ig-slide.prev img,
+.ig-slide.next img{
+  filter: blur(2px);
+}
+
+.ig-slide.active img{
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+
+.ig-prev{
+  left:0;
+}
+
+.ig-next{
+  right:0;
+}
+
+.ig-prev:hover,
+.ig-next:hover{
+  background:#df6908;
 }
 
 /* MOBILE */
@@ -1875,4 +2054,86 @@ Section Vidio Dukungan
   .events-nav{
     display:none;
   }
+}
+
+
+@media (max-width:768px){
+
+/* ubah layout menjadi vertikal */
+.desc-row{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* paksa logo di atas */
+.desc-logo{
+  order:-1;
+  display:block;
+  margin:0 auto 1rem auto; /* ini yang membuat logo benar-benar di tengah */
+  width:4.5rem;
+}
+
+/* teks penuh ke kanan */
+.description{
+  width:100%;
+  text-align:left;
+}
+
+}
+
+@media (max-width:768px){
+.main-timeline7 .timeline{
+  width:100%;
+}
+
+.main-timeline7 .timeline-content{
+  padding:1rem 1rem 1rem 4rem;
+  text-align:left;
+}
+}
+
+@media (max-width:992px){
+  .insight-grid{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media (max-width:576px){
+  .insight-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width:768px){
+
+.ig-feed-section{
+  padding:3rem 1rem;
+}
+
+.ig-slider{
+  max-width:100%;
+}
+
+.ig-slide img{
+  width:100%;
+  border-radius:0.8rem;
+}
+
+/* tombol lebih kecil */
+.ig-prev,
+.ig-next{
+  width:36px;
+  height:36px;
+  font-size:18px;
+}
+
+/* tombol lebih dekat ke gambar */
+.ig-prev{
+  left:5px;
+}
+
+.ig-next{
+  right:5px;
+}
 }
