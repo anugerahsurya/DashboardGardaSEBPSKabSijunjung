@@ -666,8 +666,8 @@ strong {
   position: relative;
   padding-top: 100px;
   padding-bottom: 50px;
-  height: 100vh;
-  min-height: 670px;
+  height: auto;
+  min-height: 100vh;
   margin-bottom: 0px;
 }
 
@@ -1429,7 +1429,7 @@ Kegiatan SE
   .hero-section {
     min-height: calc(100vh - 4rem);
     margin-top: 4rem;
-    margin-bottom: 5rem;
+    padding-bottom: 5rem;
   }
 
   .events-listing-section {
@@ -1778,20 +1778,6 @@ Section Vidio Dukungan
   padding: 3rem 0;
   background: linear-gradient(135deg, #f9c85b 0%, #f7a24b 50%, #f79039 100%);
 }
-/* 
-.video-section::before {
-  content: "";
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: #f79039;
-  filter: blur(180px);
-  opacity: 0.3;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-} */
 
 .video-wrapper {
   position: relative;
