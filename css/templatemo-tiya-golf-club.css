@@ -1369,6 +1369,8 @@ Kegiatan SE
   color: var(--white-color);
 }
 
+
+
 /*---------------------------------------
   RESPONSIVE STYLES               
 -----------------------------------------*/
@@ -1485,10 +1487,12 @@ Kegiatan SE
   padding: 2rem 1rem;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
+  
 }
 
 .team-scroll::-webkit-scrollbar {
   display: none;
+  
 }
 
 /* ================================================= */
