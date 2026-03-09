@@ -434,3 +434,10 @@
 .btn-team-more:hover i {
   transform: translateX(4px);
 }
+
+.insight-icon {
+  width: 5em; /* ukuran mengikuti font-size parent */
+  height: auto; /* menjaga rasio 3000:1200 */
+  display: block;
+  margin: 0 auto 0.5em auto;
+}

@@ -764,8 +764,8 @@ strong {
   ABOUT SECTOIN              
 -----------------------------------------*/
 .about-section {
-  padding-bottom: 70px;
-  padding-top: 150px;
+  padding-bottom: 4em;
+  padding-top: 5em;
 }
 
 .member-block-image-wrap {
@@ -1116,21 +1116,39 @@ Kegiatan SE
   font-size: 2rem;
 }
 
-.events-nav button {
-  border: none;
-  background: #f28c38;
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 1.25px;
-  cursor: pointer;
-  margin-left: 10px;
-  transition: 0.3s;
+.events-nav {
+  display: flex;
+  gap: 0.8em;
 }
 
+.events-nav button {
+  border: none;
+  background: #ffffff;
+  color: #f79039;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  font-size: 1.4em;
+  cursor: pointer;
+  transition: 0.3s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* hover biar lebih hidup */
 .events-nav button:hover {
-  background: #d96f1f;
+  background: #f79039;
+  color: #ffffff;
+}
+
+/* sembunyikan di layar kecil */
+@media (max-width: 48em) {
+  .events-nav {
+    display: none;
+  }
 }
 
 /* wrapper slider */
@@ -1155,9 +1173,7 @@ Kegiatan SE
 
 /* event card */
 .events-section {
-  background:
-    url("images/pattern2.jpg"), linear-gradient(135deg, #f9c85b, #eaa134);
-  background-size: cover, 300px, cover;
+  background: linear-gradient(135deg, #f9c85b 0%, #f7a24b 50%, #f79039 100%);
 }
 
 .event-card {
@@ -1751,13 +1767,18 @@ Section Informasi
 Section Vidio Dukungan
 ======================= */
 /* SECTION */
-.video-section {
+/* .video-section {
   padding: 5rem 0;
   background:
     url("images/pattern2.jpg"), linear-gradient(135deg, #f9c85b, #eaa134);
   background-size: cover, 300px, cover;
+} */
+/* event card */
+.video-section {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #f9c85b 0%, #f7a24b 50%, #f79039 100%);
 }
-
+/* 
 .video-section::before {
   content: "";
   position: absolute;
@@ -1770,7 +1791,7 @@ Section Vidio Dukungan
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 0;
-}
+} */
 
 .video-wrapper {
   position: relative;
@@ -1832,18 +1853,6 @@ Section Vidio Dukungan
     linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
     linear-gradient(135deg, #febd26, #f79039);
 }
-
-/* .ig-feed-section::before{
-  content:"";
-  position:absolute;
-  width:400px;
-  height:400px;
-  background:#FEBD26;
-  filter:blur(180px);
-  top:-150px;
-  left:-150px;
-  opacity:0.4;
-} */
 
 .ig-slider {
   position: relative;
