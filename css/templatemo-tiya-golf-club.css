@@ -1408,6 +1408,7 @@ Kegiatan SE
     background-color: var(--primary-color);
   }
 
+ 
   .navbar-nav .dropdown-menu {
     position: relative;
     left: 10px;
@@ -1416,7 +1417,8 @@ Kegiatan SE
     max-width: 155px;
     margin-top: 15px;
     margin-bottom: 15px;
-  }
+  } 
+
 
   .navbar-expand-lg .navbar-nav {
     padding-top: 15px;
