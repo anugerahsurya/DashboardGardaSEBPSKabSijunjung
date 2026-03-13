@@ -163,6 +163,7 @@ strong {
   display: inline-block;
   position: relative;
   text-align: left;
+  font-size: 2rem;
 }
 
 .cd-words-wrapper b {
@@ -664,8 +665,8 @@ strong {
   background-size: cover;
   background-position: center;
   position: relative;
-  padding-top: 100px;
-  padding-bottom: 50px;
+  padding-top: 6.25rem;      /* 100px */
+  padding-bottom: 3.125rem;  
   height: auto;
   min-height: 100vh;
   margin-bottom: 0px;
@@ -673,7 +674,7 @@ strong {
 
 .hero-50 {
   height: auto;
-  min-height: 540px;
+  min-height: 33.75rem;  /* 540px */
   margin-bottom: 0[x];
 }
 
@@ -1369,6 +1370,8 @@ Kegiatan SE
   color: var(--white-color);
 }
 
+
+
 /*---------------------------------------
   RESPONSIVE STYLES               
 -----------------------------------------*/
@@ -1406,6 +1409,7 @@ Kegiatan SE
     background-color: var(--primary-color);
   }
 
+ 
   .navbar-nav .dropdown-menu {
     position: relative;
     left: 10px;
@@ -1414,7 +1418,8 @@ Kegiatan SE
     max-width: 155px;
     margin-top: 15px;
     margin-bottom: 15px;
-  }
+  } 
+
 
   .navbar-expand-lg .navbar-nav {
     padding-top: 15px;
@@ -1485,10 +1490,12 @@ Kegiatan SE
   padding: 2rem 1rem;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
+  
 }
 
 .team-scroll::-webkit-scrollbar {
   display: none;
+  
 }
 
 /* ================================================= */
@@ -2108,4 +2115,35 @@ Section Vidio Dukungan
   .ig-next {
     right: 5px;
   }
+}
+
+
+html, body {
+  overflow-x: hidden;
+}
+
+/* Tampilan HP */
+@media (max-width: 768px){
+
+  .navbar{
+    min-height: 4rem;   /* sesuaikan dengan tinggi navbar awal */
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-brand-image{
+    width: 2.2rem;
+    height: auto;
+  }
+
+  .navbar-brand-text{
+    font-size: 0.9rem;
+    line-height: 1.1;
+  }
+
+  .navbar-brand-text small{
+    font-size: 0.7rem;
+    display: block;
+  }
+
 }
