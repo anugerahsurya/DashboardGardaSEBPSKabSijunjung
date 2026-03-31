@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // ===============================
 async function loadData() {
   try {
-    const res = await fetch("shapefile/DataRef_Final.geojson");
+    const res = await fetch("shapefile/DataDashboardFinal.geojson");
     geojsonData = await res.json();
 
     populateKecamatanFilter();
@@ -92,7 +92,7 @@ async function loadData() {
     applyFilter();
   } catch (err) {
     console.error(err);
-    alert("Gagal memuat DataRef_Final.geojson");
+    alert("Gagal memuat DataDashboardFinal.geojson");
   }
 }
 
@@ -306,9 +306,9 @@ function updateDetailTable(properties) {
   const totalUsaha = Number(properties.jumlah_usaha) || 0;
 
   // 🔹 ambil data tambahan dari geojson
-  const jumlahJorong = Number(properties.jml_jrg) || 0;
+  const jumlahJorong = Number(properties.jml_jorong) || 0;
   const jumlahPenduduk = Number(properties.jml_pdd) || 0;
-  const luasWilayah = Number(properties.luas_wil) || 0;
+  const luasWilayah = Number(properties.luas) || 0;
 
   let kbliData = [];
 
